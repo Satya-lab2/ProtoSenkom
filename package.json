@@ -1,0 +1,15 @@
+{
+  "name": "daurin",
+  "private": true,
+  "version": "1.0.0",
+  "description": "DAUR.IN - Aplikasi Pelaporan & Pengelolaan Sampah Berbasis Komunitas",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

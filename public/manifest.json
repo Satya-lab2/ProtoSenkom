@@ -1,0 +1,11 @@
+{
+  "name": "DAUR.IN",
+  "short_name": "DAUR.IN",
+  "description": "Aplikasi Pelaporan & Pengelolaan Sampah Berbasis Komunitas",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#1A1A2E",
+  "theme_color": "#4CAF50",
+  "orientation": "portrait",
+  "lang": "id"
+}

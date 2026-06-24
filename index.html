@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#4CAF50" />
+  <meta name="description" content="DAUR.IN — Aplikasi Pelaporan & Pengelolaan Sampah Berbasis Komunitas. Lingkungan Bersih, Hidup Bahagia." />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/lucide-static@latest/font/lucide.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <title>DAUR.IN — Lingkungan Bersih, Hidup Bahagia</title>
+</head>
+<body>
+  <div id="app-container">
+    <div id="app">
+      <div id="splash-screen" class="splash-screen">
+        <div class="splash-content">
+          <div class="splash-logo">
+            <div class="splash-icon">
+              <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+                <circle cx="36" cy="36" r="36" fill="url(#splash-grad)"/>
+                <path d="M24 44c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+                <path d="M30 38l6-6 6 6" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="36" cy="26" r="4" fill="#fff"/>
+                <path d="M20 48h32" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+                <defs>
+                  <linearGradient id="splash-grad" x1="0" y1="0" x2="72" y2="72">
+                    <stop stop-color="#4CAF50"/>
+                    <stop offset="1" stop-color="#2E7D32"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <h1 class="splash-title">DAUR<span>.IN</span></h1>
+            <p class="splash-tagline">Lingkungan Bersih, Hidup Bahagia</p>
+          </div>
+          <div class="splash-loader">
+            <div class="splash-loader-bar"></div>
+          </div>
+        </div>
+      </div>
+      <main id="page-content"></main>
+    </div>
+  </div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
