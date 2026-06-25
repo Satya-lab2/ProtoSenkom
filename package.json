@@ -5,9 +5,9 @@
   "description": "DAUR.IN - Aplikasi Pelaporan & Pengelolaan Sampah Berbasis Komunitas",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "npx vite",
+    "build": "npx vite build",
+    "preview": "npx vite preview"
   },
   "devDependencies": {
     "vite": "^6.3.5"
