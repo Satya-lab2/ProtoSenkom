@@ -18,6 +18,7 @@ import { renderWargaProfile } from './pages/warga/profile.js';
 import { renderPetugasDashboard } from './pages/petugas/dashboard.js';
 import { renderPetugasMap } from './pages/petugas/map.js';
 import { renderReportDetail } from './pages/petugas/report-detail.js';
+import { renderPetugasProfile } from './pages/petugas/profile.js';
 import { renderAdminDashboard } from './pages/admin/dashboard.js';
 import { renderAdminHeatmap } from './pages/admin/heatmap.js';
 import { renderAdminUsers } from './pages/admin/users.js';
@@ -47,6 +48,7 @@ function initApp() {
   router.register('/petugas/dashboard', () => { renderPetugasDashboard(); initHeaderEvents(); });
   router.register('/petugas/map', () => { renderPetugasMap(); initHeaderEvents(); });
   router.register('/petugas/report/:id', (params) => { renderReportDetail(params); });
+  router.register('/petugas/profile', () => { renderPetugasProfile(); initHeaderEvents(); });
 
   // Admin Routes
   router.register('/admin/dashboard', () => { renderAdminDashboard(); initHeaderEvents(); });

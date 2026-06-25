@@ -107,6 +107,16 @@ export function renderAdminSettings() {
         </div>
       </div>
 
+      <!-- Logout Button -->
+      <div class="settings-section" style="padding: 0 16px;">
+        <button class="btn-logout" id="menu-logout-admin">
+          <div class="btn-logout-icon">
+            ${svgIcon('logOut', 20)}
+          </div>
+          <span>Keluar dari Akun Admin</span>
+        </button>
+      </div>
+
       <!-- App Info -->
       <div style="text-align:center;padding:24px 16px;">
         <p style="font-size:12px;color:var(--color-text-tertiary);">
@@ -118,6 +128,24 @@ export function renderAdminSettings() {
     </div>
 
     ${renderBottomNav('admin-settings')}
+
+    <!-- Logout Confirmation Modal -->
+    <div class="logout-modal-overlay" id="logout-modal-admin" style="display:none;">
+      <div class="logout-modal">
+        <div class="logout-modal-icon">
+          ${svgIcon('logOut', 32)}
+        </div>
+        <h3>Keluar dari Akun?</h3>
+        <p>Anda akan keluar dari sesi Admin dan perlu login kembali untuk mengakses panel kontrol.</p>
+        <div class="logout-modal-actions">
+          <button class="btn btn-ghost" id="logout-cancel-admin">Batal</button>
+          <button class="btn btn-danger" id="logout-confirm-admin">
+            ${svgIcon('logOut', 16)}
+            Ya, Keluar
+          </button>
+        </div>
+      </div>
+    </div>
   `;
 
   // Export CSV
@@ -146,4 +174,46 @@ export function renderAdminSettings() {
       window.location.hash = '/onboarding';
     }
   });
+
+  // Logout — show confirmation modal
+  const logoutModal = document.getElementById('logout-modal-admin');
+
+  document.getElementById('menu-logout-admin')?.addEventListener('click', () => {
+    logoutModal.style.display = 'flex';
+    requestAnimationFrame(() => logoutModal.classList.add('active'));
+  });
+
+  document.getElementById('logout-cancel-admin')?.addEventListener('click', () => {
+    closeLogoutModal();
+  });
+
+  // Close on overlay click
+  logoutModal.addEventListener('click', (e) => {
+    if (e.target === logoutModal) closeLogoutModal();
+  });
+
+  document.getElementById('logout-confirm-admin')?.addEventListener('click', () => {
+    // Animate out
+    const modal = logoutModal.querySelector('.logout-modal');
+    modal.style.animation = 'logout-modal-out 0.3s var(--ease-out) forwards';
+    logoutModal.style.animation = 'fade-in 0.2s var(--ease-out) reverse forwards';
+
+    setTimeout(() => {
+      store.logout();
+      router.navigate('/login');
+      showToast('Berhasil Keluar', 'Anda telah keluar dari akun Admin', 'info');
+    }, 250);
+  });
+
+  function closeLogoutModal() {
+    const modal = logoutModal.querySelector('.logout-modal');
+    modal.style.animation = 'logout-modal-out 0.3s var(--ease-out) forwards';
+    logoutModal.style.animation = 'fade-in 0.2s var(--ease-out) reverse forwards';
+    setTimeout(() => {
+      logoutModal.style.display = 'none';
+      logoutModal.classList.remove('active');
+      modal.style.animation = '';
+      logoutModal.style.animation = '';
+    }, 300);
+  }
 }

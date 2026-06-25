@@ -15,7 +15,7 @@ const navConfigs = {
   petugas: [
     { id: 'petugas-dashboard', label: 'Dashboard', icon: 'home', route: '/petugas/dashboard' },
     { id: 'petugas-map', label: 'Peta', icon: 'map', route: '/petugas/map' },
-    { id: 'profile', label: 'Profil', icon: 'user', route: '/warga/profile' },
+    { id: 'profile', label: 'Profil', icon: 'user', route: '/petugas/profile' },
   ],
   admin: [
     { id: 'admin-dashboard', label: 'Dashboard', icon: 'barChart', route: '/admin/dashboard' },
