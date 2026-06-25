@@ -9,6 +9,7 @@ import { initHeaderEvents } from './components/header.js';
 
 // ── Page Imports ──
 import { renderOnboarding } from './pages/onboarding.js';
+import { renderLogin } from './pages/login.js';
 import { renderWargaHome } from './pages/warga/home.js';
 import { renderWargaReport } from './pages/warga/report.js';
 import { renderWargaHistory } from './pages/warga/history.js';
@@ -31,6 +32,9 @@ function initApp() {
   
   // Onboarding
   router.register('/onboarding', () => { renderOnboarding(); });
+
+  // Login
+  router.register('/login', () => { renderLogin(); });
 
   // Warga Routes
   router.register('/warga/home', () => { renderWargaHome(); initHeaderEvents(); });
@@ -58,9 +62,11 @@ function initApp() {
       setTimeout(() => {
         splash.style.display = 'none';
         
-        // Determine first route
+        // Determine first route: onboarding → login → app
         if (!store.isOnboardingDone()) {
           router.navigate('/onboarding');
+        } else if (!store.isLoginDone()) {
+          router.navigate('/login');
         } else {
           const role = store.getRole();
           const defaultRoutes = {

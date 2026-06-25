@@ -108,6 +108,14 @@ export function renderWargaProfile() {
         </div>
       </div>
 
+      <!-- Logout Button -->
+      <button class="btn-logout" id="menu-logout">
+        <div class="btn-logout-icon">
+          ${svgIcon('logOut', 20)}
+        </div>
+        <span>Keluar dari Akun</span>
+      </button>
+
       <!-- App Info -->
       <div style="text-align:center;padding:16px 0;">
         <p style="font-size:12px;color:var(--color-text-tertiary);">
@@ -120,6 +128,24 @@ export function renderWargaProfile() {
     </div>
 
     ${renderBottomNav('profile')}
+
+    <!-- Logout Confirmation Modal -->
+    <div class="logout-modal-overlay" id="logout-modal" style="display:none;">
+      <div class="logout-modal">
+        <div class="logout-modal-icon">
+          ${svgIcon('logOut', 32)}
+        </div>
+        <h3>Keluar dari Akun?</h3>
+        <p>Anda akan keluar dari akun dan perlu login kembali untuk mengakses aplikasi.</p>
+        <div class="logout-modal-actions">
+          <button class="btn btn-ghost" id="logout-cancel">Batal</button>
+          <button class="btn btn-danger" id="logout-confirm">
+            ${svgIcon('logOut', 16)}
+            Ya, Keluar
+          </button>
+        </div>
+      </div>
+    </div>
   `;
 
   // Toggle notification
@@ -142,4 +168,46 @@ export function renderWargaProfile() {
       showToast('Data Direset', 'Semua data telah dihapus', 'info');
     }
   });
+
+  // Logout — show confirmation modal
+  const logoutModal = document.getElementById('logout-modal');
+
+  document.getElementById('menu-logout')?.addEventListener('click', () => {
+    logoutModal.style.display = 'flex';
+    requestAnimationFrame(() => logoutModal.classList.add('active'));
+  });
+
+  document.getElementById('logout-cancel')?.addEventListener('click', () => {
+    closeLogoutModal();
+  });
+
+  // Close on overlay click
+  logoutModal.addEventListener('click', (e) => {
+    if (e.target === logoutModal) closeLogoutModal();
+  });
+
+  document.getElementById('logout-confirm')?.addEventListener('click', () => {
+    // Animate out
+    const modal = logoutModal.querySelector('.logout-modal');
+    modal.style.animation = 'logout-modal-out 0.3s var(--ease-out) forwards';
+    logoutModal.style.animation = 'fade-in 0.2s var(--ease-out) reverse forwards';
+
+    setTimeout(() => {
+      store.logout();
+      router.navigate('/login');
+      showToast('Berhasil Keluar', 'Anda telah keluar dari akun', 'info');
+    }, 250);
+  });
+
+  function closeLogoutModal() {
+    const modal = logoutModal.querySelector('.logout-modal');
+    modal.style.animation = 'logout-modal-out 0.3s var(--ease-out) forwards';
+    logoutModal.style.animation = 'fade-in 0.2s var(--ease-out) reverse forwards';
+    setTimeout(() => {
+      logoutModal.style.display = 'none';
+      logoutModal.classList.remove('active');
+      modal.style.animation = '';
+      logoutModal.style.animation = '';
+    }, 300);
+  }
 }

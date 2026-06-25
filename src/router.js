@@ -2,6 +2,8 @@
    DAUR.IN — Hash-based SPA Router
    ============================================ */
 
+import { store } from './store.js';
+
 class Router {
   constructor() {
     this.routes = new Map();
@@ -48,8 +50,21 @@ class Router {
     }
 
     if (!handler) {
-      // Default fallback
-      this.navigate('/warga/home');
+      // Default fallback — respect auth state
+      if (!store.isOnboardingDone()) {
+        this.navigate('/onboarding');
+      } else if (!store.isLoginDone()) {
+        this.navigate('/login');
+      } else {
+        this.navigate('/warga/home');
+      }
+      return;
+    }
+
+    // Auth guard: block app routes if not logged in
+    const publicRoutes = ['/onboarding', '/login'];
+    if (!publicRoutes.includes(hash) && !store.isLoginDone()) {
+      this.navigate('/login');
       return;
     }
 

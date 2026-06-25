@@ -222,5 +222,5 @@ function goToSlide(index) {
 
 function finishOnboarding() {
   store.completeOnboarding();
-  router.navigate('/warga/home');
+  router.navigate('/login');
 }

@@ -12,6 +12,7 @@ function getDefaultData() {
   return {
     currentRole: 'warga',
     onboardingDone: false,
+    loginDone: false,
     
     user: {
       id: 'USR001',
@@ -232,6 +233,22 @@ class Store {
   completeOnboarding() {
     this.data.onboardingDone = true;
     this.save();
+  }
+
+  // ── Login ──
+  isLoginDone() {
+    return this.data.loginDone;
+  }
+
+  completeLogin() {
+    this.data.loginDone = true;
+    this.save();
+  }
+
+  logout() {
+    this.data.loginDone = false;
+    this.save();
+    this.emit('logout');
   }
 
   // ── Reports ──
